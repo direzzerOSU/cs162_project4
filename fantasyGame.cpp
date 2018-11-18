@@ -17,11 +17,30 @@ int Character::roll(int number, int sides) {
    return value;
 }
 
+// restores a random percentage of the character's strength (health)
+void Character::restoreStrength(int damage) {
+   float percent = rand() % 100;
+   percent = percent/100.00 + 1;
+
+   damage = damage * percent;
+   strength += damage;
+}
+
 //################################################################
 
 // returns Barbarian
 std::string Barbarian::getType() {
    return charType;
+}
+
+// sets the Barbarian's name
+void Barbarian::setName(std::string x) {
+   name = x;
+}
+
+// returns the Barbarian's name
+std::string Barbarian::getName() {
+   return name;
 }
 
 // generates (returns) an attack value for the barbarian character type
@@ -36,7 +55,7 @@ int Barbarian::attacking() {
 }
 
 // prints most of the attack stats & updates player stats based on attack results
-void Barbarian::defending(int attacker) {
+int Barbarian::defending(int attacker) {
    int defender = 0;
 
    cout << "Defender Type: " << charType << endl;
@@ -58,13 +77,17 @@ void Barbarian::defending(int attacker) {
       cout << "Defender's Updated Strength: " << strength << endl;
 
       if(strength <= 0) {
-         cout << endl << "Barbarian has been defeated!" << endl;
+         cout << endl << getName() << " has been defeated!" << endl;
       }
+
+      return damage;
    }
    else {
       // do nothing - the char defended against the attack
       cout << "Total Inflicted Damage: 0" << endl;
       cout << "Defender's Updated Strength: " << strength << endl;
+      
+      return 0;
    }
 }
 
@@ -80,6 +103,16 @@ std::string Vampire::getType() {
    return charType;
 }
 
+// sets the Vampire's name
+void Vampire::setName(std::string x) {
+   name = x;
+}
+
+// returns the Vampire's name
+std::string Vampire::getName() {
+   return name;
+}
+
 // generates an attack value for the Vampire character type
 int Vampire::attacking() {
    // rolls one 12-sided dice
@@ -92,7 +125,7 @@ int Vampire::attacking() {
 }
 
 // prints most of the attack stats & updates player stats based on attack results
-void Vampire::defending(int attacker) {
+int Vampire::defending(int attacker) {
    int defender = 0;
 
    cout << "Defender Type: " << charType << endl;
@@ -126,13 +159,17 @@ void Vampire::defending(int attacker) {
       cout << "Defender's Updated Strength: " << strength << endl;
 
       if(strength <= 0) {
-         cout << endl << "Vampire has been defeated!" << endl;
+         cout << endl << getName() << " has been defeated!" << endl;
       }
+
+      return damage;
    }
    else {
       // do nothing - the char defended against the attack
       cout << "Total Inflicted Damage: 0" << endl;
       cout << "Defender's Updated Strength: " << strength << endl;
+
+      return 0;
    }
 }
 
@@ -148,6 +185,16 @@ std::string BlueMen::getType() {
    return charType;
 }
 
+// sets the BlueMen's name
+void BlueMen::setName(std::string x) {
+   name = x;
+}
+
+// returns the BlueMen's name
+std::string BlueMen::getName() {
+   return name;
+}
+
 // generates an attack value for the BlueMen character type
 int BlueMen::attacking() {
    // rolls two 10-sided dice
@@ -160,7 +207,7 @@ int BlueMen::attacking() {
 }
 
 // prints most of the attack stats & updates player stats based on attack results
-void BlueMen::defending(int attacker) {
+int BlueMen::defending(int attacker) {
    int defender = 0;
 
    cout << "Defender Type: " << charType << endl;
@@ -193,13 +240,17 @@ void BlueMen::defending(int attacker) {
       cout << "Defender's Updated Strength: " << strength << endl;
 
       if(strength <= 0) {
-         cout << endl << "Blue Men have been defeated!" << endl;
+         cout << endl << getName() << " has been defeated!" << endl;
       }
+
+      return damage;
    }
    else {
       // do nothing - the char defended against the attack
       cout << "Total Inflicted Damage: 0" << endl;
       cout << "Defender's Updated Strength: " << strength << endl;
+
+      return 0;
    }
 }
 
@@ -213,6 +264,16 @@ int BlueMen::getStrength() {
 // returns Medusa
 std::string Medusa::getType() {
    return charType;
+}
+
+// sets the Medusa's name
+void Medusa::setName(std::string x) {
+   name = x;
+}
+
+// returns the Medusa's name
+std::string Medusa::getName() {
+   return name;
 }
 
 // generates an attack value for the Medusa character type
@@ -233,7 +294,7 @@ int Medusa::attacking() {
 }
 
 // prints most of the attack stats & updates player stats based on attack results
-void Medusa::defending(int attacker) {
+int Medusa::defending(int attacker) {
    int defender = 0;
 
    cout << "Defender Type: " << charType << endl;
@@ -255,13 +316,17 @@ void Medusa::defending(int attacker) {
       cout << "Defender's Updated Strength: " << strength << endl;
 
       if(strength <= 0) {
-         cout << endl << "Medusa has been defeated!" << endl;
+         cout << endl << getName() << " has been defeated!" << endl;
       }
+
+      return damage;
    }
    else {
       // do nothing - the char defended against the attack
       cout << "Total Inflicted Damage: 0" << endl;
       cout << "Defender's Updated Strength: " << strength << endl;
+
+      return 0;
    }
 }
 
@@ -277,6 +342,16 @@ std::string HarryPotter::getType() {
    return charType;
 }
 
+// sets the HarryPotter's name
+void HarryPotter::setName(std::string x) {
+   name = x;
+}
+
+// returns the HarryPotter's name
+std::string HarryPotter::getName() {
+   return name;
+}
+
 // generates an attack value for the HarryPotter character type
 int HarryPotter::attacking() {
    // rolls two 6-sided dice
@@ -289,7 +364,7 @@ int HarryPotter::attacking() {
 }
 
 // prints most of the attack stats & updates player stats based on attack results
-void HarryPotter::defending(int attacker) {
+int HarryPotter::defending(int attacker) {
    int defender = 0;
 
    cout << "Defender Type: " << charType << endl;
@@ -320,17 +395,67 @@ void HarryPotter::defending(int attacker) {
       }
       else if(strength <= 0 && lives == 1) {
          lives -= 1;
-         cout << endl << "Harry Potter has been defeated!" << endl;
+         cout << endl << getName() << " has been defeated!" << endl;
       }
+
+      return damage;
    }
    else {
       // do nothing - the char defended against the attack
       cout << "Total Inflicted Damage: 0" << endl;
       cout << "Defender's Updated Strength: " << strength << endl;
+      
+      return 0;
    }
 }
 
 // returns the amount of strength (health)
 int HarryPotter::getStrength() {
    return strength;
+}
+
+// takes two characters (fighters) as function parameters and executes rounds
+// of combat until one of the two characters (fighters) dies (i.e., strength <= 0)
+Character* Fight(Character* player1, Character* player2) {
+   int attack = 0;
+   int counter = 1;
+   int damage1 = 0;
+   int damage2 = 0;
+
+   // start the fight
+   while(player1->getStrength() > 0 && player2->getStrength() > 0) {
+      cout << "Round #" << counter << " (Player #1: " << player1->getName() << " Attack): " << endl;
+      attack = 0;
+      attack = player1->attacking();
+      damage2 += player2->defending(attack);
+
+      if(player2->getStrength() > 0) {
+         cout << endl << "Round #" << counter << " (Player #2: " << player2->getName() << " Attack): " << endl;
+         attack = 0;
+         attack = player2->attacking();
+         damage1 = player1->defending(attack);
+      }
+
+      counter += 1;
+
+      cout << endl;
+      cout << "----------------------------------------" << endl << endl;
+   }
+
+   if(player1->getStrength() <= 0 && player2->getStrength() > 0) {
+      cout << "Congratulations! " << "Player #2: " << player2->getName() << " Won!" << endl;
+      cout << endl << "----------------------------------------" << endl << endl;
+      player2->restoreStrength(damage2);
+      return player1;
+   }
+//   else(player1->getStrength() > 0 && player2->getStrength() <= 0) {
+   else {
+      cout << "Congratulations! " << "Player #1: " << player1->getName() << " Won!" << endl;
+      cout << "----------------------------------------" << endl << endl;
+      player1->restoreStrength(damage1);
+      return player2;
+   }
+//   else {
+//      cout << "Whoops! Looks like there's a bug with finding the winner of the fight..." << endl;
+//   }
 }

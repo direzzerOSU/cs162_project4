@@ -1,103 +1,199 @@
 /*********************************************************************
-** Program name: Fantasy Combat Game 
+** Program name: Circular Linked List 
 ** Author: Ryan DiRezze
-** Date: November 4, 2018
-** Description: 
+** Date: November 11, 2018
+** Description: Implements the main menu and other menu-like
+   functions.
 *********************************************************************/
 
 #include "menu.hpp"
 #include "inputValidation.hpp"
+#include "CircularLinkedList.hpp"
 
-// the main/primary menu that issues arrive at after starting the program;
-// this menu allows the user to navigate to various areas of the program
-// to perform different transactions and view different data.
-void fantasyGameMenu(char& option1, char& option2) {
+// game introduction menu
+void introMenu(int& numFighters, bool& status) {
    // introduction
-   string program_name = "Fantasy Combat Game";
+   string program_name = "Fantasy Combat Game Tournament";
    cout << "Hello! Welcome to the " << program_name << "!" << endl << endl;
+   
+   cout << "What would you like to do?" << endl;
+   cout << "   1. Start game" << endl;
+   cout << "   2. Exit" << endl;
+   cout << endl << "Selection: ";
+   int quit;
+   cin >> quit;
+   intValidation(quit);
 
-   while((tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f') || (tolower(option2) != 'a' && tolower(option2) != 'b' && tolower(option2) != 'c' && tolower(option2) != 'd' && tolower(option2) != 'e' && tolower(option2) != 'f')) {
+   // begin the game
+   if(quit == 1) {
+      cout << endl << "How many fighters would you like to be on each team?" << endl;
+
+      //int fighters = -5;
+      cout << "   # of Fighters/Team: ";
+      cin >> numFighters;
+      intValidation(numFighters);
+      status = true;
+   }
+   else if(quit == 2) {
+      // end the game
+      status = false;
+   }
+}
+
+// primary menu that users use to navigate the program
+void GameMenu(int& option1) {
+   
+   // ensure a valid character is chosen for team #1
+   while(option1 != 1 && option1 != 2 && option1 != 3 && option1 != 4 && option1 != 5 && option1 != 6) {
       // menu prompt
-      cout << "Please select two characters that will fight each other from the following choices:" << endl;
-      cout << "Input the option's corresponding letter to make a selection..." << endl << endl;
+      cout << "Please select an option from the following choices:" << endl;
+      cout << "Input the option1's corresponding letter to make a selection..." << endl << endl;
       
       // menu choices
-      cout << "    a. Vampire" << endl;
-      cout << "    b. Barbarian" << endl;
-      cout << "    c. Blue Men" << endl;
-      cout << "    d. Medusa" << endl;
-      cout << "    e. Harry Potter" << endl;
-      cout << "    f. Exit the program" << endl << endl;
+      cout << "    1. Vampire" << endl;
+      cout << "    2. Barbarian" << endl;
+      cout << "    3. Blue Men" << endl;
+      cout << "    4. Medusa" << endl;
+      cout << "    5. Harry Potter" << endl;
+      cout << "    6. Exit" << endl;
 
-      cout << "Character #1: ";
+      cout << endl << "Player Selection: ";
       cin >> option1;
-      charValidation(option1);   // verify that a character was entered
+      intValidation(option1);
 
-      // input validation to only allow valid menu option choices by the user (for Player #1)
-      if(tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f') {
-         while(tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f') {
-            cout << "Uh oh! It looks like you didn't input a valid menu option... Please try again." << endl << endl;
-            cout << "Character #1: ";
+      if(option1 != 1 && option1 != 2 && option1 != 3 && option1 != 4 && option1 != 5 && option1 != 6) {
+         cout << endl;
+         while(option1 != 1 && option1 != 2 && option1 != 3 && option1 != 4 && option1 != 5 && option1 != 6) {
+            cout << "Uh oh! It looks like you didn't input a valid menu option1... Please try again." << endl << endl;
             cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            cout << "Team #1: ";
             cin >> option1;
             cout << endl;
          }
       }
-      if(tolower(option1) == 'f') {
+      if(option1 == 6) {
          break;
       }
+//      cout << endl;
+   }
 
-      cout << "Character #2: ";
-      cin >> option2;
-      charValidation(option2);
+//   // ensure a valid character is chosen for team #2
+//   while(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4 && option2 != 5 && option2 != 6) {
+//      // menu prompt
+//      cout << "Please select an option from the following choices:" << endl;
+//      cout << "Input the option2's corresponding letter to make a selection..." << endl << endl;
+//      
+//      // menu choices
+//      cout << "    1. Vampire" << endl;
+//      cout << "    2. Barbarian" << endl;
+//      cout << "    3. Blue Men" << endl;
+//      cout << "    4. Medusa" << endl;
+//      cout << "    5. Harry Potter" << endl;
+//      cout << "    6. Exit" << endl;
+//
+//      cout << endl << "Team #2: ";
+//      cin >> option2;
+//      intValidation(option2);
+//
+//      if(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4 && option2 != 5 && option2 != 6) {
+//         cout << endl;
+//         while(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4 && option2 != 5 && option2 != 6) {
+//            cout << "Uh oh! It looks like you didn't input a valid menu option2... Please try again." << endl << endl;
+//            cin.clear();
+//            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+//            cout << "Team #2: ";
+//            cin >> option2;
+//            cout << endl;
+//         }
+//      }
+//      if(option2 == 6) {
+//         break;
+//      }
+//   }
+}
 
-      // input validation to only allow valid menu option choices by the user (for Player #2)
-      if(tolower(option2) != 'a' && tolower(option2) != 'b' && tolower(option2) != 'c' && tolower(option2) != 'd' && tolower(option2) != 'e' && tolower(option2) != 'f') {
-         while(tolower(option2) != 'a' && tolower(option2) != 'b' && tolower(option2) != 'c' && tolower(option2) != 'd' && tolower(option2) != 'e' && tolower(option2) != 'f') {
+
+// the main/primary menu that users arrive at after starting the program;
+// this menu allows the user to navigate to various areas of the program
+// to perform different transactions and view different data.
+void OLD_GameMenu(char& option1) {
+   // introduction
+   string program_name = "Doubly-linked List";
+   cout << "Hello! Welcome to the " << program_name << "!" << endl << endl;
+
+   while(tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f' && tolower(option1) != 'g' && tolower(option1) != 'h') {
+      // menu prompt
+      cout << "Please select an option from the following choices:" << endl;
+      cout << "Input the option's corresponding letter to make a selection..." << endl << endl;
+      
+      // menu choices
+      cout << "    a. Add a new node to the head" << endl;
+      cout << "    b. Add a new node to the tail" << endl;
+      cout << "    c. Delete the first node in the list" << endl;
+      cout << "    d. Delete the last node in the list" << endl;
+      cout << "    e. Traverse the list reversely (tail to head)" << endl;
+      cout << "    f. Print the head node's value" << endl;
+      cout << "    g. Print the tail node's value" << endl;
+      cout << "    h. Exit the program" << endl << endl;
+
+      cout << "Selection: ";
+      cin >> option1;
+      charValidation(option1);
+
+      if(tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f' && tolower(option1) != 'g' && tolower(option1) != 'h') {
+         cout << endl;
+         while(tolower(option1) != 'a' && tolower(option1) != 'b' && tolower(option1) != 'c' && tolower(option1) != 'd' && tolower(option1) != 'e' && tolower(option1) != 'f' && tolower(option1) != 'g' && tolower(option1) != 'h') {
             cout << "Uh oh! It looks like you didn't input a valid menu option... Please try again." << endl << endl;
-            cout << "Character #2: ";
             cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');    
-            cin >> option2;
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            cout << "Selection: "; 
+            cin >> option1;
             cout << endl;
          }
       }
-      if(tolower(option2) == 'f') {
+      else {
+         cout << endl;
+      }
+      if(tolower(option1) == 'f') {
          break;
       }
-
-      cout << endl;
-
    }
 }
 
 // a small prompt that asks the user if he/she would like to return to the main
 // menu; this was intended to appear after the user performs some transaction
-void mainMenuReturn(char& option) {
-   option = 'n';
-   while(tolower(option) == 'n') {
-      cout << "Do you want to return to the main menu? (Y/N): ";
+void mainMenuReturn(bool& status) {
+   int option = 0;
+   while(option != 9 && option != 5) {
+      cout << "Do you want to return to the main menu?" << endl;
+      cout << "   1. Yes" << endl;
+      cout << "   2. No" << endl;
+      cout << endl << "Selection: ";
       cin >> option;
-      validYesNo(option);
+      intValidation(option);
 
-      if(tolower(option) == 'y') {
-         option = 'z';       // let the program escape the 'while loop' & return to the menu
+      if(option == 1) {
+         option = 9;       // let the program escape the 'while loop' & return to the menu
+         status = true;
       }
       
-      else if(tolower(option) == 'n') {
-         cout << "Do you want to exit the program? (Y/N): ";
+      else if(option == 2) {
+         cout << endl << "Do you want to exit the program?" << endl;
+         cout << "   1. Yes" << endl;
+         cout << "   2. No" << endl;
+         cout << endl << "Selection: ";
          cin >> option;
-         validYesNo(option);
+         intValidation(option);
          
          // escape the 'while loop' & quit the program
-         if(tolower(option) == 'y') {
-            option = 'f';
-            cout << endl;     // add a line & space for aesthetics
+         if(option == 1) {
+            option = 5;
+            status = false;
          }
          
          // do nothing and let the program run back through the 'while loop'
-         else if(tolower(option) == 'n') {
+         else if(tolower(option) == 2) {
             //option = 'n'
          }
       }

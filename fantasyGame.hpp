@@ -17,11 +17,15 @@ class Character {
  public:
     Character() {};
     virtual int attacking() = 0;
-    virtual void defending(int) = 0;
+    virtual int defending(int) = 0;
     virtual int getStrength() = 0;
+    virtual void setName(std::string) = 0;
+    virtual std::string getName() = 0;
     virtual std::string getType() = 0;
     int roll(int, int);
+    void restoreStrength(int);
     void printStats();
+    Character* Fight(Character*, Character*);
     virtual ~Character() {};
  protected:
     std::string charType;
@@ -29,6 +33,7 @@ class Character {
     int defense = 0;
     int armor = 0;
     int strength = 0;
+    std::string name = "";
 };
 
 class Barbarian : public Character {
@@ -39,8 +44,10 @@ class Barbarian : public Character {
       strength = 12;
     }
     int attacking();
-    void defending(int);
+    int defending(int);
     int getStrength();
+    void setName(std::string);
+    std::string getName();
     std::string getType();
     ~Barbarian() {};    // destructor (of Barbarian character objects)
  private:
@@ -57,8 +64,10 @@ class Vampire : public Character {
       strength = 18;
     }
     int attacking();
-    void defending(int);
+    int defending(int);
     int getStrength();
+    void setName(std::string);
+    std::string getName();
     std::string getType();
     ~Vampire() {};      // destructor (of Vampire character objects)
  private:
@@ -74,8 +83,10 @@ class BlueMen : public Character {
        strength = 12;    
     }
     int attacking();
-    void defending(int);
+    int defending(int);
     int getStrength();
+    void setName(std::string);
+    std::string getName();
     std::string getType();
     ~BlueMen() {};      // destructor (of Blue Men character objects)
  private:
@@ -91,8 +102,10 @@ class Medusa : public Character {
        strength = 8;    
     }
     int attacking();
-    void defending(int);
+    int defending(int);
     int getStrength();
+    void setName(std::string);
+    std::string getName();
     std::string getType();
     ~Medusa() {};      // destructor (of Medusa character objects)
  private:
@@ -108,8 +121,10 @@ class HarryPotter : public Character {
        strength = 10;         
     }
     int attacking();
-    void defending(int);
+    int defending(int);
     int getStrength();
+    void setName(std::string);
+    std::string getName();
     std::string getType();
     ~HarryPotter() {};      // destructor (of HarryPotter character objects)
  private:

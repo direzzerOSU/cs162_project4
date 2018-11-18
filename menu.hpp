@@ -19,7 +19,9 @@ using std::endl;
 using std::string;
 
 // function prototype for the program's menu
-void fantasyGameMenu(char&, char&);
-void mainMenuReturn(char&);
+void introMenu(int&, bool&);
+void GameMenu(int&);
+//void OLD_GameMenu(char&);
+void mainMenuReturn(bool&);
 
 #endif
