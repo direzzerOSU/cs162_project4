@@ -1,8 +1,8 @@
 /*********************************************************************
-** Program name: Fantasy Combat Game 
+** Program name: Fantasy Combat Game
 ** Author: Ryan DiRezze
 ** Date: November 4, 2018
-** Description: 
+** Description:
 *********************************************************************/
 
 #include "menu.hpp"
@@ -23,7 +23,7 @@ int main() {
 
    // initialize linked list variables
    Queue* teams;
-   Queue* losers;  
+   Queue* losers;
 
    // loop until the user quits the program
    while(status == true) {
@@ -52,7 +52,7 @@ int main() {
          Character* player1;
          Character* player2;
 
-         // initialize character #1 for combat      
+         // initialize character #1 for combat
          if(selection1 == 1) {
             player1 = new Vampire();
          }
@@ -80,12 +80,12 @@ int main() {
          std::string name1;
          cin.ignore();
          getline(cin, name1);
-         player1->setName(name1);   
+         player1->setName(name1);
 
          cout << endl << endl << "Select a player for team #2!" << endl;
 
          cout << endl;
-         GameMenu(selection2);      
+         GameMenu(selection2);
 
          // initialize character #2 for combat
          if(selection2 == 1) {
@@ -116,7 +116,7 @@ int main() {
          cin.ignore();
          getline(cin, name2);
          player2->setName(name2);
-         
+
          // add players to each team
          teams[0].addBack(player1);
          teams[1].addBack(player2);
@@ -132,7 +132,7 @@ int main() {
             cout << "   Player #" << k+1 << ": " << teams[n].getCharacter(k)->getName() << endl;
          }
       }
-      
+
       cout << endl << "----------------------------------------" << endl << endl;
 
       // start the fight & handle the loser(s)
@@ -169,7 +169,7 @@ int main() {
             }
             team2Score -= 1;
             team1Score += 2;
-         } 
+         }
       }
 
 //      cout << endl;
@@ -211,7 +211,7 @@ int main() {
 
       cout << endl << endl;
       mainMenuReturn(status);
-      
+
       cout << endl;
 
       while(teams[0].isEmpty() == false) {
@@ -234,4 +234,3 @@ int main() {
    }
    return 0;
 }
-
